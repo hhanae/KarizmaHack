@@ -89,52 +89,58 @@
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-          
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../../pages/forms/form-recettes.php">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Basic UI Elements</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/buttons.html">Buttons</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/dropdowns.html">Dropdowns</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/typography.html">Typography</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="../../pages/forms/basic_elements.html">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
-              <span class="menu-title">Form Elements</span>
+              <span class="menu-title">Form Recette</span>
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../../pages/tables/table-recettes.php">
+            <a class="nav-link" href="../../pages/tables/basic-table.html">
               <span class="menu-icon">
                 <i class="mdi mdi-table-large"></i>
               </span>
-              <span class="menu-title">Tables</span>
+              <span class="menu-title">Table Recette</span>
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../../pages/charts/chartjs.html">
+            <a class="nav-link" href="pages/samples/error-404.html">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
               <span class="menu-title">Charts</span>
             </a>
           </li>
-          
           <li class="nav-item menu-items">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+            <a class="nav-link" data-toggle="collapse" href="pages/samples/error-404.html" aria-expanded="false" aria-controls="auth">
               <span class="menu-icon">
                 <i class="mdi mdi-security"></i>
               </span>
-              <span class="menu-title">User Pages</span>
+              <span class="menu-title">Profil</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../../pages/samples/blank-page.html"> Blank Page </a></li>
-                <li class="nav-item"> <a class="nav-link" href="../../pages/samples/error-404.html"> 404 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="../../pages/samples/error-500.html"> 500 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="../../pages/samples/login.html"> Login </a></li>
-                <li class="nav-item"> <a class="nav-link" href="../../pages/samples/register.html"> Register </a></li>
-              </ul>
-            </div>
+            
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.html">
+            <a class="nav-link" href="https://github.com/hhanae/KarizmaHack">
               <span class="menu-icon">
                 <i class="mdi mdi-file-document-box"></i>
               </span>
@@ -356,47 +362,74 @@
                   <div class="card-body">
                     <h4 class="card-title"> Recette et Ingrédients</h4>
                     <p class="card-description"> La Recette Secrète à vous!</p>
-                    <form class="forms-sample" id="myForm" action="traitement_formulaire.php" method="post">
-                      <div class="form-group">
-                        <label for="nom_recette">Nom de la Recette</label>
-                        <input type="text" class="form-control" id="nom_recette" placeholder="Nom de votre Recette Secrète" name="nom_recette">
-                      </div>
-                      <div class="form-group">
+                    <?php
+include('../connexion.php');
+
+// Vérifier si l'ID de la recette à modifier est défini dans l'URL
+if (isset($_GET['id'])) {
+    $id_recette = $_GET['id'];
+
+    // Récupérer les données de la recette à partir de la base de données
+    $sql = "SELECT * FROM recettes WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id_recette);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $recette = $result->fetch_assoc();
+
+    // Vérifier si le formulaire a été soumis
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Mettre à jour les données dans la base de données
+        $nom_recette = $_POST['nom_recette'];
+        $liste_ingred = $_POST['liste_ingred'];
+        $etapes_prep = $_POST['etapes_prep'];
+        $duree_prep = $_POST['duree_prep'];
+
+        $sql_update = "UPDATE recettes SET nom_recette=?, liste_ingred=?, etapes_prep=?, duree_prep=? WHERE id=?";
+        $stmt_update = $conn->prepare($sql_update);
+        $stmt_update->bind_param("ssssi", $nom_recette, $liste_ingred, $etapes_prep, $duree_prep, $id_recette);
+        $stmt_update->execute();
+
+        exit();
+    }
+} else {
+    // L'ID de la recette n'est pas défini dans l'URL, rediriger vers la page principale ou une autre page
+    header("Location: index.php");
+    exit();
+}
+
+// Fermer la connexion
+$stmt->close();
+$conn->close();
+?>
+
+                <!-- Afficher le formulaire de modification avec les données pré-remplies -->
+                <form class="forms-sample" action="" method="post">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Nom de la Recette</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Nom de votre Recette Secrète" name="nom_recette" value="<?php echo $recette['nom_recette']; ?>">
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputCity1">Durée de Préparation</label>
-                        <input type="time" class="form-control" id="exampleInputCity1" placeholder="Durée de Préparation" name="duree_prep">
-                      </div>
-                      <div class="form-group">
+                        <input type="time" class="form-control" id="exampleInputCity1" placeholder="Durée de Préparation" name="duree_prep" value="<?php echo $recette['duree_prep']; ?>">
+                    </div>
+                    <div class="form-group">
                         <label for="liste_ingred">Liste des Ingrédients</label>
-                        <textarea type="text" class="form-control" id="exampleTextarea1" rows="5" name="liste_ingred"></textarea>
-                      </div>
-                      <div class="form-group">
-                        <label for="liste_ingred">Etapes de prépartion</label>
-                        <textarea type="text" class="form-control" id="exampleTextarea1" rows="5" name="etapes_prep"></textarea>
-                      </div>
-                      <button type="submit" class="btn btn-primary mr-2">Ajouter</button>
-                      <button class="btn btn-dark">Annuler</button>
-                    </form>
+                        <textarea type="text" class="form-control" id="exampleTextarea1" rows="5" name="liste_ingred"><?php echo $recette['liste_ingred']; ?></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="liste_ingred">Etapes de préparation</label>
+                        <textarea type="text" class="form-control" id="exampleTextarea1" rows="5" name="etapes_prep"><?php echo $recette['etapes_prep']; ?></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Modifier</button>
+                    <a href="../tables/table-recettes.php" class="btn btn-dark">Annuler</a>
+                </form>
                   </div>
                 </div>
               </div>
               
               
-              <script>
-                document.getElementById('myForm').addEventListener('submit', function(event) {
-                    var nomRecetteInput = document.getElementById('nom_recette');
-                    var nomRecetteValue = nomRecetteInput.value.trim();
-                    
-                    // Expression régulière pour le nom de la recette (ajustez selon vos besoins)
-                    var regex = /^[a-zA-Z\s]+$/;
-
-                    // Validation avec la regex
-                    if (!regex.test(nomRecetteValue)) {
-                        alert('Le nom de la recette n\'est pas valide. Il doit contenir uniquement des lettres et des espaces.');
-                        event.preventDefault(); // Empêcher la soumission du formulaire
-                    }
-                });
-              </script>
-
+              
               
               
             </div>
@@ -406,7 +439,7 @@
           <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
               <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Karizma-Kitchen 2023</span>
-              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://github.com/hhanae/KarizmaHack" target="_blank">KARIZMA RECIPES</a> from HANIM Hanae</span>
             </div>
           </footer>
           <!-- partial -->

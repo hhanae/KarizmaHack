@@ -59,7 +59,7 @@ use PHPMailer\PHPMailer\PHPMailer;?>
 
                   $receiver = $_POST['email'];
                   $subject = "Confirmation de l'authentité";
-                  $body = "Vous venez de vous inscrire dans notre plateforme SOMAPORT. Afin de confirmer que ce compte est bien le votre, merci de cliquer sur ce lien:\n\n http://localhost/SOMAPORT%20V1/pages/samples/confirmation.php?id=$user_id&token=$token";
+                  $body = "Vous venez de vous inscrire dans notre plateforme SOMAPORT. Afin de confirmer que ce compte est bien le votre, merci de cliquer sur ce lien:\n\n http://http://localhost/karizma-Kitchen/template/pages/samples/confirmation.php?id=$user_id&token=$token";
                   $sender = "From:secure.prescription00@gmail.com";
                   if (mail($receiver, $subject, $body, $sender)) {
                     $_SESSION['flash']['success']= 'Email sent successfully to $receiver';

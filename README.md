@@ -3,7 +3,6 @@
 
 🤗 Ce Hackaton a pour objectif de Développer une mini-application de partage de recettes de cuisine avec une partie back-end et une partie front-end en utilisant la technologie de notre choix. Je suis HANIM Hanae, une parmis des dizaines de participants à ce Hackaton. J'ai nommé mon projet "Karizma Kitchen Hack" et j'ai choisi de l'implémenter avec: PHP (back-end), HTML/CSS/BOOTSTRAP (front-end) et MySQL (DataBase)
 # Spécifications Fonctionnelles:
-
 ## Partie Backend
 La partie backend de mon projet relate:
 - La Réalisation de la gestion des Recettes. Notamment, mon projet permet aux utilisateurs et aux passionnées par la cuisine de créer, lire, mettre à jour et supprimer des recettes.
@@ -18,9 +17,14 @@ La partie frontend de mon projet relate:
 - L'Implémentation d'un Responsive Design.
 ## Les Suppléments
 - Sécurité: Dans mon projet, j'ai suivi les Bonnes pratiques pour s'assurer de l'authenticité, la confidentialité(en hashant le password et en utilisant des tokens) et de la validation des données.
-- Documentation: J'ai même fourni cette documentation sur git pour vous présenter mon projet et pour faciliter son utilisation. 
+- Documentation: J'ai même fourni cette documentation sur git pour vous présenter mon projet et pour faciliter son utilisation.
 
-# Recommandations pou l'utilisation
+# Architecture Adoptée:
+- Pour implémenter mon application, j'ai choisi d'adopter une couche trois tiers représentée ci-dessous:
+![6-3-tier-architecture-php-2-638](https://github.com/hhanae/KarizmaHack/assets/97336261/f32853cf-31a1-4131-ad90-3fd540cf58d9)
+
+
+# Recommandations pour l'utilisation
 Je vous recommande vivement de cloner le répertoire de mon projet et de l'utiliser🤗. Voici toutes les instructions et les conseils pour bien se lancer:
 
 - Vous devez vous disposez d'un logiciel qui simplifie le processus d'installation(Xampp) et de gestion de serveurs web locaux pour exécuter MySQL.

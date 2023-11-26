@@ -10,7 +10,7 @@ if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])){
   if(password_verify($_POST['password'], $user->password_user)){
     $_SESSION['auth'] = $user;
     $_SESSION['flash']['success'] ='Vous êtes maintenant connecté';
-    header("Location: ../../index.html");
+    header("Location: ../../index.php");
     exit();
   }else{
     $_SESSION['flash']['danger'] = 'Identifiant ou mot de passe incorrecte';

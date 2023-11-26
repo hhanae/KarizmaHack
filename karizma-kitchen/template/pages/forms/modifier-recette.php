@@ -1,3 +1,7 @@
+<?php
+require '../samples/functions.php';
+logged_only();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,7 +41,7 @@
                   <span class="count bg-success"></span>
                 </div>
                 <div class="profile-name">
-                  <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
+                  <h5 class="mb-0 font-weight-normal"><?= $_SESSION['auth']->nom_user; ?></h5>
                   <span>Gold Member</span>
                 </div>
               </div>
@@ -305,7 +309,7 @@
                 <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                   <div class="navbar-profile">
                     <img class="img-xs rounded-circle" src="../../assets/images/faces/face15.jpg" alt="">
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name">Henry Klein</p>
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name"><?= $_SESSION['auth']->nom_user; ?></p>
                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                   </div>
                 </a>

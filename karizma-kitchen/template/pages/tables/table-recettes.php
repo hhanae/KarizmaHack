@@ -1,3 +1,7 @@
+<?php
+require '../samples/functions.php';
+logged_only();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,7 +41,7 @@
                   <span class="count bg-success"></span>
                 </div>
                 <div class="profile-name">
-                  <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
+                  <h5 class="mb-0 font-weight-normal"><?= $_SESSION['auth']->nom_user; ?></h5>
                   <span>Gold Member</span>
                 </div>
               </div>
@@ -82,7 +86,7 @@
             <span class="nav-link">Navigation</span>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../../index.html">
+            <a class="nav-link" href="../../index.php">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>
@@ -91,7 +95,7 @@
           </li>
           
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../../pages/forms/basic_elements.html">
+            <a class="nav-link" href="../../pages/forms/form-recettes.php">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
@@ -99,7 +103,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../../pages/tables/basic-table.html">
+            <a class="nav-link" href="../../pages/tables/table-recettes.php">
               <span class="menu-icon">
                 <i class="mdi mdi-table-large"></i>
               </span>
@@ -107,7 +111,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="pages/samples/error-404.html">
+            <a class="nav-link" href="../samples/error-404.html">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
@@ -116,12 +120,11 @@
           </li>
           
           <li class="nav-item menu-items">
-            <a class="nav-link" data-toggle="collapse" href="pages/samples/error-404.html" aria-expanded="false" aria-controls="auth">
+            <a class="nav-link" data-toggle="collapse" href="../samples/error-404.html" aria-expanded="false" aria-controls="auth">
               <span class="menu-icon">
                 <i class="mdi mdi-security"></i>
               </span>
               <span class="menu-title">Profil</span>
-              <i class="menu-arrow"></i>
             </a>
           </li>
           <li class="nav-item menu-items">
@@ -254,7 +257,7 @@
                 <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                   <div class="navbar-profile">
                     <img class="img-xs rounded-circle" src="../../assets/images/faces/face15.jpg" alt="">
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name">Henry Klein</p>
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name"><?= $_SESSION['auth']->nom_user; ?></p>
                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                   </div>
                 </a>

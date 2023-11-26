@@ -1,9 +1,6 @@
-<br>
-<p align="center">
-  <h2 align="center"> Karizma Kitchen Hackaton
-  </h2>
-</p>
-<br>
+
+# ** Karizma Kitchen Hackaton **
+
 
 🤗 Ce Hackaton a pour objectif de Développer une mini-application de partage de recettes de cuisine avec une partie back-end et une partie front-end en utilisant la technologie de notre choix. Je suis HANIM Hanae, une parmis des dizaines de participants à ce Hackaton. J'ai nommé mon projet "Karizma Kitchen Hack" et j'ai choisi de l'implémenter avec: PHP (back-end), HTML/CSS/BOOTSTRAP (front-end) et MySQL (DataBase)
 # Spécifications Fonctionnelles:
